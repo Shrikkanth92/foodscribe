@@ -1,4 +1,4 @@
-package com.foodscribe.service.implementation;
+package com.foodscribe.service;
 
 import java.util.Set;
 

@@ -29,12 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return SecurityUtility.passwordEncoder();
 	}
 
-	private static final String[] PUBLIC_MATCHES = { "/css/**", "/js/**", "/image/**", "/book/**", "/user/**" };
+	private static final String[] PUBLIC_MATCHES = { "/css/**", "/js/**", "/image/**", "/restaurant/**", "/user/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().cors().disable().httpBasic().and().authorizeRequests().antMatchers(PUBLIC_MATCHES)
-				.permitAll().anyRequest().authenticated();
+				.permitAll();
 	}
 	
 	@Autowired

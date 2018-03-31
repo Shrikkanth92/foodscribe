@@ -24,7 +24,7 @@ import com.foodscribe.config.SecurityUtility;
 import com.foodscribe.domain.User;
 import com.foodscribe.domain.security.Role;
 import com.foodscribe.domain.security.UserRole;
-import com.foodscribe.service.implementation.UserService;
+import com.foodscribe.service.UserService;
 import com.foodscribe.utility.MailConstructor;
 
 
