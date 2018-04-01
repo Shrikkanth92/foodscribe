@@ -22,21 +22,16 @@ public class MenuItem {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Menu getMenu() {
-		return menu;
-	}
-	public void setMenu(Menu menu) {
-		this.menu = menu;
-	}
+	
 	private String itemName;
 	private String itemCategory;
 	private String itemDesc;
 	private int itemPrice;
 	
 	@ManyToOne
-	@JoinColumn(name="menu_id")
+	@JoinColumn(name="restaurant_id")
 	@JsonIgnore
-	private Menu menu;
+	private Restaurant restaurant;
 	
 
 	public String getItemName() {

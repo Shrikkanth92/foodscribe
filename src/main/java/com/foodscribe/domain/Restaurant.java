@@ -1,10 +1,13 @@
 package com.foodscribe.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,11 +32,12 @@ public class Restaurant {
 	private String costScale;
 	private String openingHours;
 	private String deliveryCost;
+	private String logoName;
 	
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "restaurant", cascade=CascadeType.ALL)
 	@JsonIgnore
-	private Menu menu;
+	private List<MenuItem> menuItems;
 
 	
 	public Long getId() {
@@ -108,12 +112,12 @@ public class Restaurant {
 		this.longitude = longitude;
 	}
 
-	public Menu getMenu() {
-		return menu;
+	public List<MenuItem> getMenuItems() {
+		return menuItems;
 	}
 
-	public void setMenu(Menu menu) {
-		this.menu = menu;
+	public void setMenuItems(List<MenuItem> menuItems) {
+		this.menuItems = menuItems;
 	}
 
 	public boolean isActive() {
@@ -162,6 +166,14 @@ public class Restaurant {
 
 	public void setDeliveryCost(String deliveryCost) {
 		this.deliveryCost = deliveryCost;
+	}
+
+	public String getLogoName() {
+		return logoName;
+	}
+
+	public void setLogoName(String logoName) {
+		this.logoName = logoName;
 	}
 	
 }
