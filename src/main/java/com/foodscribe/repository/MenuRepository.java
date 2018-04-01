@@ -1,14 +1,13 @@
-package com.foodscribe.repository;
+ package com.foodscribe.repository;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.foodscribe.domain.Menu;
-import com.foodscribe.domain.Restaurant;
+import com.foodscribe.domain.MenuItem;
 
-public interface MenuRepository extends CrudRepository<Menu, Long>{
+public interface MenuRepository extends CrudRepository<MenuItem, Long>{
 	
-	Menu findByRestId(String id);
+	List<MenuItem> findByRestaurantId(Long id);
 
 }

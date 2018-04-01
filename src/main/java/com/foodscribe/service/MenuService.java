@@ -2,10 +2,10 @@ package com.foodscribe.service;
 
 import java.util.List;
 
-import com.foodscribe.domain.Restaurant;
+import com.foodscribe.domain.MenuItem;
 
 public interface MenuService {
 	
-	Menu findByRestId(String id);
+	List<MenuItem> findByRestaurantId(Long id);
 
 }
