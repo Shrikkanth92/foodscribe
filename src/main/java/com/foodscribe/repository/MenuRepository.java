@@ -8,6 +8,6 @@ import com.foodscribe.domain.MenuItem;
 
 public interface MenuRepository extends CrudRepository<MenuItem, Long>{
 	
-	List<MenuItem> findByRestaurantId(Long id);
+	List<MenuItem> findByRestaurantIdOrderByItemCategory(Long id);
 
 }
