@@ -5,9 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 public class MenuItem {
@@ -26,7 +28,7 @@ public class MenuItem {
 	private String itemName;
 	private String itemCategory;
 	private String itemDesc;
-	private int itemPrice;
+	private float itemPrice;
 	
 	@ManyToOne
 	@JoinColumn(name="restaurant_id")
@@ -52,13 +54,18 @@ public class MenuItem {
 	public void setItemDesc(String itemDesc) {
 		this.itemDesc = itemDesc;
 	}
-	public int getItemPrice() {
+	public float getItemPrice() {
 		return itemPrice;
 	}
-	public void setItemPrice(int itemPrice) {
+	public void setItemPrice(float itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
 	
 
 }
