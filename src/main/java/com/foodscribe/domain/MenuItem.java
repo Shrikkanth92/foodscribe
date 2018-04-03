@@ -32,7 +32,7 @@ public class MenuItem {
 	
 	@ManyToOne
 	@JoinColumn(name="restaurant_id")
-	@JsonInclude
+	@JsonIgnore
 	private Restaurant restaurant;
 	
 

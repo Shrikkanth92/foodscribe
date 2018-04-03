@@ -32,6 +32,12 @@ public class RestaurantResource {
 		return restaurantList;
 	}
 	
+	@RequestMapping("/restid/{id}")
+	public Restaurant getRestaurantById(@PathVariable("id") Long id){
+		Restaurant restaurantList = restaurantService.findOne(id);
+		return restaurantList;
+	}
+	
 	@RequestMapping(value="/searchRestaurant", method=RequestMethod.POST)
 	public List<Restaurant> searchRestaurant(@RequestBody String keyword){
 		List<Restaurant> restaurantList = restaurantService.blurrySearch(keyword);

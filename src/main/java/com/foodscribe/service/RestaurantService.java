@@ -13,4 +13,6 @@ public interface RestaurantService {
 	List<Restaurant> findByZip(String zip);
 	
 	List<Restaurant> blurrySearch(String title);
+
+	Restaurant findOne(Long id);
 }

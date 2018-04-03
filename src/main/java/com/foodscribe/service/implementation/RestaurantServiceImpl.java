@@ -49,4 +49,10 @@ public class RestaurantServiceImpl implements RestaurantService{
 	public List<Restaurant> findByZip(String zip) {
 		return restaurantRepository.findByZip(zip);
 	}
+
+	@Override
+	public Restaurant findOne(Long id) {
+		
+		return restaurantRepository.findOne(id);
+	}
 }
