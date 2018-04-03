@@ -22,7 +22,7 @@ public class MenuServiceImpl implements MenuService{
 
 	@Override
 	public List<MenuItem> findByRestaurantId(Long id) {
-		return menuRepository.findByRestaurantId(id);
+		return menuRepository.findByRestaurantIdOrderByItemCategory(id);
 	}
 	
 }
