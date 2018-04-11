@@ -3,6 +3,7 @@ package com.foodscribe.domain;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,12 +14,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+import javax.persistence.OneToOne;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.foodscribe.domain.security.Authority;
@@ -46,7 +46,18 @@ public class User implements UserDetails, Serializable{
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<UserRole>();
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<UserPayment> userPaymentList;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<UserShipping> userShippingList;
+	
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private ShoppingCart shoppingCart;
+	
+	@OneToMany(mappedBy="user")
+	private List<Order> orderList;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -151,6 +162,37 @@ public class User implements UserDetails, Serializable{
 		this.enabled = enabled;
 	}
 
+	public List<UserPayment> getUserPaymentList() {
+		return userPaymentList;
+	}
+
+	public void setUserPaymentList(List<UserPayment> userPaymentList) {
+		this.userPaymentList = userPaymentList;
+	}
+
+	public List<UserShipping> getUserShippingList() {
+		return userShippingList;
+	}
+
+	public void setUserShippingList(List<UserShipping> userShippingList) {
+		this.userShippingList = userShippingList;
+	}
+
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
+	}
 	
 	
 }

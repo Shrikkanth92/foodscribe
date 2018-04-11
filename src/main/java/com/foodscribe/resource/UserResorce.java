@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.foodscribe.config.SecurityConfig;
 import com.foodscribe.config.SecurityUtility;
 import com.foodscribe.domain.User;
-import com.foodscribe.domain.security.Role;
-import com.foodscribe.domain.security.UserRole;
 import com.foodscribe.service.UserService;
 import com.foodscribe.utility.MailConstructor;
 
@@ -65,12 +63,7 @@ public class UserResorce {
 		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
 		user.setPassword(encryptedPassword);
 		
-		Role role = new Role();
-		role.setRoleId(2);
-		role.setName("ROLE_USER");
-		Set<UserRole> userRoles = new HashSet<UserRole>();
-		userRoles.add(new UserRole(user,role));
-		userService.createUser(user, userRoles);
+		userService.createUser(user);
 		
 		SimpleMailMessage email = mailConstructor.constructNewUserEmail(user, password);
 		mailSender.send(email);

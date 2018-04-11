@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodscribe.domain.User;
-import com.foodscribe.domain.security.UserRole;
-import com.foodscribe.repository.RoleRepository;
+import com.foodscribe.domain.UserShipping;
 import com.foodscribe.repository.UserRepository;
+import com.foodscribe.repository.UserShippingRepository;
 import com.foodscribe.service.UserService;
 
 
@@ -26,24 +26,15 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 	
 	@Autowired
-	private RoleRepository roleRepository;
+	private UserShippingRepository userShippingRepository;
 	
 	
 	@Transactional
-	public User createUser(User user, Set<UserRole> userRoles) {
+	public User createUser(User user) {
 		User localUser = userRepository.findByUsername(user.getUsername());
 		if(null != localUser){
 			LOG.info("User {} already exists", user.getUsername());
-		} else {
-			for(UserRole ur : user.getUserRoles()){
-				if(roleRepository.findOne(ur.getUserRoleId()) != null){
-					LOG.info("Role {} already exists", ur.getRole());
-				}else{
-				roleRepository.save(ur.getRole());
-				}
-			}
-			
-			user.getUserRoles().addAll(userRoles);
+		} 
 		/*	
 			ShoppingCart shoppingCart = new ShoppingCart();
 			shoppingCart.setUser(user);
@@ -53,7 +44,7 @@ public class UserServiceImpl implements UserService{
 			user.setUserShippingList(new ArrayList<UserShipping>());*/
 			
 			localUser = userRepository.save(user);
-		}
+		
 		return localUser;
 	}
 
@@ -112,7 +103,7 @@ public class UserServiceImpl implements UserService{
 				userPaymentRepository.save(userPayment);
 			}
 		}
-	}
+	}*/
 
 	@Override
 	public void updateUserShipping(UserShipping shipping, User user) {
@@ -136,6 +127,6 @@ public class UserServiceImpl implements UserService{
 			}
 		}
 		
-	}*/
+	}
 	
 }

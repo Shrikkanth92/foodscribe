@@ -3,12 +3,12 @@ package com.foodscribe.service;
 import java.util.Set;
 
 import com.foodscribe.domain.User;
-import com.foodscribe.domain.security.UserRole;
+import com.foodscribe.domain.UserShipping;
 
 
 
 public interface UserService {
-	User createUser(User user, Set<UserRole> userRoles);
+	User createUser(User user);
 
 	User findByUsername(String username);
 
@@ -17,5 +17,8 @@ public interface UserService {
 	User save(User user);
 	
 	User findById(Long userId);
+
+	void updateUserShipping(UserShipping shipping, User user);
 	
+	void setUserDefaultShipping(long userShippingId, User user);
 }
