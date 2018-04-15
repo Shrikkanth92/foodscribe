@@ -53,14 +53,12 @@ public class OrderServiceImpl implements OrderService{
 			ShoppingCart shoppingCart,
 			DeliveryAddress deliveryAddress,
 			Payment payment,
-			String deliveryMethod,
 			User user
 			){
 		Order order = new Order();
 		order.setOrderStatus("created");
 		order.setPayment(payment);
 		order.setDeliveryAddress(deliveryAddress);
-		order.setDeliveryMethod(deliveryMethod);
 		
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 		

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.foodscribe.domain.ShoppingCart;
 import com.foodscribe.domain.User;
 import com.foodscribe.domain.UserShipping;
 import com.foodscribe.repository.UserRepository;
@@ -35,13 +36,12 @@ public class UserServiceImpl implements UserService{
 		if(null != localUser){
 			LOG.info("User {} already exists", user.getUsername());
 		} 
-		/*	
-			ShoppingCart shoppingCart = new ShoppingCart();
-			shoppingCart.setUser(user);
-			
-			user.setShoppingCart(shoppingCart);
-			user.setUserPaymentList(new ArrayList<UserPayment>());
-			user.setUserShippingList(new ArrayList<UserShipping>());*/
+		
+		ShoppingCart shoppingCart = new ShoppingCart();
+		shoppingCart.setUser(user);
+		
+		user.setShoppingCart(shoppingCart);
+		user.setUserShippingList(new ArrayList<UserShipping>());
 			
 			localUser = userRepository.save(user);
 		

@@ -11,6 +11,6 @@ public interface OrderService {
 	Order createOrder(ShoppingCart shoppingCart, DeliveryAddress deliveryAddress,  Payment payment);
 
 	Order createOrder(ShoppingCart shoppingCart, DeliveryAddress deliveryAddress,
-			Payment payment, String deliveryMethod, User user);
+			Payment payment, User user);
 
 }

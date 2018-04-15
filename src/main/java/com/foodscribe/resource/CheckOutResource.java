@@ -60,24 +60,16 @@ public class CheckOutResource {
 		
 		DeliveryAddress deliveryAddress = om.convertValue(mapper.get("deliveryAddress"), DeliveryAddress.class);
 		Payment payment = om.convertValue(mapper.get("payment"), Payment.class);
-		String shippingMethod = (String) mapper.get("shippingMethod");
 		
 		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 		User user = userService.findByUsername(principal.getName());
-		Order order = orderService.createOrder(shoppingCart, deliveryAddress, payment, shippingMethod, user);
+		Order order = orderService.createOrder(shoppingCart, deliveryAddress, payment, user);
 		
 		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
 		
 		shoppingCartService.clearShoppingCart(shoppingCart);
 		
-		LocalDate today = LocalDate.now();
-		LocalDate estimatedDeliveryDate;
-		if (shippingMethod.equals("groundShipping")) {
-			estimatedDeliveryDate=today.plusDays(5);
-		} else {
-			estimatedDeliveryDate=today.plusDays(3);
-		}
 		
 		this.order = order;
 		

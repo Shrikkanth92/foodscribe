@@ -1,6 +1,7 @@
 package com.foodscribe.resource;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ public class LoginResource {
 		
 		return Collections.singletonMap("token", session.getId());
 	}
+	
 	
 	@RequestMapping("/checkSession")
 	public ResponseEntity checkSession(){
