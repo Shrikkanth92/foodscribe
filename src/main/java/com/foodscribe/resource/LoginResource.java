@@ -31,8 +31,8 @@ public class LoginResource {
 	@RequestMapping(value ="/token", method=RequestMethod.POST)
 	public Map<String, Long> token(@RequestBody HashMap<String, String> mapper){
 		
-		String userEmail = mapper.get("useremail");
-		String password = mapper.get("password");
+		String userEmail = mapper.get("useremail").trim();
+		String password = mapper.get("password").trim();
 		
 		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
 		
