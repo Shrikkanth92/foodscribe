@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,13 +40,13 @@ public class ShoppingCartResource {
 	private ShoppingCartService cartService;
 	
 	@RequestMapping("/add")
-	public ResponseEntity addItem(@RequestBody HashMap<String, String> mapper, Principal principal) {
+	public ResponseEntity addItem(@RequestBody HashMap<String, String> mapper) {
 		
 		String menuItemId = mapper.get("menuItemId");
 		String qty = mapper.get("qty");
-		String username = mapper.get("username");
+		String userid = mapper.get("userid");
 		
-		User user = userService.findByUsername(username);
+		User user = userService.findById(Long.parseLong(userid));
 		MenuItem menuItem = menuService.findById(Long.parseLong(menuItemId));
 		
 		CartItem cartItem = cartItemService.addMenuItemToCartItem(menuItem, user, Integer.parseInt(qty));
@@ -54,8 +55,8 @@ public class ShoppingCartResource {
 	}
 	
 	@RequestMapping("/getCartItemList")
-	public List<CartItem> getCartItemList(Principal principal){
-		User user = userService.findByUsername(principal.getName());
+	public List<CartItem> getCartItemList(@RequestHeader(value="userid") Long userid){
+		User user = userService.findById(userid);
 		ShoppingCart cart = user.getShoppingCart();
 		
 		List<CartItem> cartItems = cartItemService.findByShoppingCart(cart);
@@ -66,8 +67,8 @@ public class ShoppingCartResource {
 	}
 	
 	@RequestMapping("/getShoppingCart")
-	public ShoppingCart getShoppingCart(Principal principal){
-		User user = userService.findByUsername(principal.getName());
+	public ShoppingCart getShoppingCart(@RequestHeader(value="userid") Long userid){
+		User user = userService.findById(userid);
 		
 		ShoppingCart cart  = user.getShoppingCart();
 		

@@ -45,7 +45,6 @@ public class LoginResource {
 			return Collections.singletonMap("userId", Long.parseLong("0"));
 		}
 		
-		
 	}
 	
 	

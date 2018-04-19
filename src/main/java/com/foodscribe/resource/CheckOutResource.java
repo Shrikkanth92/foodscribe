@@ -53,23 +53,22 @@ public class CheckOutResource {
 	
 	@RequestMapping(value = "/checkout", method=RequestMethod.POST)
 	public Order checkoutPost(
-				@RequestBody HashMap<String, Object> mapper,
-				Principal principal
+				@RequestBody HashMap<String, Object> mapper
 			){
 		ObjectMapper om = new ObjectMapper();
 		
 		DeliveryAddress deliveryAddress = om.convertValue(mapper.get("deliveryAddress"), DeliveryAddress.class);
 		Payment payment = om.convertValue(mapper.get("payment"), Payment.class);
+		Long userid = (Long) mapper.get("userid");
 		
-		ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
+		ShoppingCart shoppingCart = userService.findById(userid).getShoppingCart();
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
-		User user = userService.findByUsername(principal.getName());
+		User user = userService.findById(userid);
 		Order order = orderService.createOrder(shoppingCart, deliveryAddress, payment, user);
 		
 		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
 		
 		shoppingCartService.clearShoppingCart(shoppingCart);
-		
 		
 		this.order = order;
 		

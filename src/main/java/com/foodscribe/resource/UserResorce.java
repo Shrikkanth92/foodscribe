@@ -1,8 +1,10 @@
 package com.foodscribe.resource;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,20 +45,17 @@ public class UserResorce {
 	private JavaMailSender mailSender;
 
 	@RequestMapping(value="/newUser", method = RequestMethod.POST)
-	public ResponseEntity newUserPost(HttpServletRequest request, @RequestBody HashMap<String, String> mapper) throws Exception{
-		String username = mapper.get("username");
+	public Map<String, Long> newUserPost(HttpServletRequest request, @RequestBody HashMap<String, String> mapper) throws Exception{
+		//String username = mapper.get("username");
 		String userEmail = mapper.get("email");
 		
-		if(userService.findByUsername(username) != null){
-			return new ResponseEntity("Username exists", HttpStatus.BAD_REQUEST);
-		}
 		if(userService.findByEmail(userEmail) != null){
-			return new ResponseEntity("Email exists", HttpStatus.BAD_REQUEST);
+			return Collections.singletonMap("userId", Long.parseLong("0"));
 		}
 		
 		User user = new User();
 		user.setEmail(userEmail);
-		user.setUsername(username);
+		user.setUsername(null);
 		
 		String password = mapper.get("password");
 		
@@ -65,11 +64,14 @@ public class UserResorce {
 		
 		userService.createUser(user);
 		
-		SimpleMailMessage email = mailConstructor.constructNewUserEmail(user, password);
-		mailSender.send(email);
+		 user = userService.findByEmail(userEmail);
+		//SimpleMailMessage email = mailConstructor.constructNewUserEmail(user, password);
+		//mailSender.send(email);
 		
-		return new ResponseEntity("User added Successfully", HttpStatus.OK);
+		
+		return Collections.singletonMap("userId", user.getId());
 	}
+	
 	
 	@RequestMapping(value = "/forgetPassword", method = RequestMethod.POST)
 	public ResponseEntity forgetPasswordPost(HttpServletRequest request, @RequestBody HashMap<String, String> mapper)
