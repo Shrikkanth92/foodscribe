@@ -100,53 +100,22 @@ public class UserResorce {
 				@RequestBody HashMap<String, Object> mapper
 			) throws Exception{
 		
-		int id = (Integer) mapper.get("id");
-		String email = (String) mapper.get("email");
-		String username = (String) mapper.get("username");
+		int id = (Integer) mapper.get("userid");
+		//String email = (String) mapper.get("email");
+		//String username = (String) mapper.get("username");
 		String firstName = (String) mapper.get("firstName");
 		String lastName = (String) mapper.get("lastName");
-		String newPassword = (String) mapper.get("newPassword");
-		String currentPassword = (String) mapper.get("currentPassword");
+		String phoneNumber = (String) mapper.get("phoneNumber");
 		
 		User currentUser = userService.findById(Long.valueOf(id));
 		
 		if(currentUser == null) {
 			throw new Exception ("User not found");
-		}
-		
-		if(userService.findByEmail(email) != null) {
-			if(userService.findByEmail(email).getId() != currentUser.getId()) {
-				return new ResponseEntity("Email not found!", HttpStatus.BAD_REQUEST);
-			}
-		}
-		
-		if(userService.findByUsername(username) != null) {
-			if(userService.findByUsername(username).getId() != currentUser.getId()) {
-				return new ResponseEntity("Username not found!", HttpStatus.BAD_REQUEST);
-			}
-		}
-		
-		SecurityConfig securityConfig = new SecurityConfig();
-		
-		
-			BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
-			String dbPassword = currentUser.getPassword();
-			
-			if(null != currentPassword)
-			if(passwordEncoder.matches(currentPassword, dbPassword)) {
-				if(newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
-					currentUser.setPassword(passwordEncoder.encode(newPassword));
-				}
-				currentUser.setEmail(email);	
-			} else {
-				return new ResponseEntity("Incorrect current password!", HttpStatus.BAD_REQUEST);  
-			}
-		
+		}	
 		
 		currentUser.setFirstName(firstName);
 		currentUser.setLastName(lastName);
-		currentUser.setUsername(username);
-		
+		currentUser.setPhoneNumber(phoneNumber);
 		
 		userService.save(currentUser);
 		
