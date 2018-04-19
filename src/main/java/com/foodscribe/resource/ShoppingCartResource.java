@@ -43,8 +43,9 @@ public class ShoppingCartResource {
 		
 		String menuItemId = mapper.get("menuItemId");
 		String qty = mapper.get("qty");
+		String username = mapper.get("username");
 		
-		User user = userService.findByUsername(principal.getName());
+		User user = userService.findByUsername(username);
 		MenuItem menuItem = menuService.findById(Long.parseLong(menuItemId));
 		
 		CartItem cartItem = cartItemService.addMenuItemToCartItem(menuItem, user, Integer.parseInt(qty));

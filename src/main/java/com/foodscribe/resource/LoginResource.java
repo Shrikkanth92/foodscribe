@@ -11,10 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.foodscribe.config.SecurityUtility;
+import com.foodscribe.domain.User;
 import com.foodscribe.service.UserService;
 
 
@@ -25,16 +29,23 @@ public class LoginResource {
 	private UserService userService;
 	
 	@RequestMapping("/token")
-	public Map<String, String> token(HttpSession session, HttpServletRequest request){
-		System.out.println(request.getRemoteHost());
+	public Map<String, Long> token(@RequestBody HashMap<String, String> mapper){
 		
-		String remoteHost = request.getRemoteHost();
-		int portNumber = request.getRemotePort();
+		String userEmail = mapper.get("useremail");
+		String password = mapper.get("password");
 		
-		System.out.println(remoteHost+":"+portNumber);
-		System.out.println(request.getRemoteAddr());
+		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
 		
-		return Collections.singletonMap("token", session.getId());
+		
+		User user = userService.findByEmail(userEmail);
+		
+		if(user != null){
+			return Collections.singletonMap("userId", user.getId());
+		} else {
+			return Collections.singletonMap("userId", Long.parseLong("0"));
+		}
+		
+		
 	}
 	
 	

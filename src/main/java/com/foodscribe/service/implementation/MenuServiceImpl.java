@@ -51,7 +51,7 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public MenuItem findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return menuRepository.findOne(id);
 	}
 
 
