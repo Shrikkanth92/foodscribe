@@ -28,7 +28,7 @@ public class LoginResource {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/token")
+	@RequestMapping(value ="/token", method=RequestMethod.POST)
 	public Map<String, Long> token(@RequestBody HashMap<String, String> mapper){
 		
 		String userEmail = mapper.get("useremail");
