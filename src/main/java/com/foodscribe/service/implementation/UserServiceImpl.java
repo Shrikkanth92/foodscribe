@@ -32,9 +32,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Transactional
 	public User createUser(User user) {
-		User localUser = userRepository.findByUsername(user.getUsername());
+		User localUser = userRepository.findByEmail(user.getEmail());
 		if(null != localUser){
-			LOG.info("User {} already exists", user.getUsername());
+			LOG.info("User {} already exists", user.getEmail());
 		} 
 		
 		ShoppingCart shoppingCart = new ShoppingCart();
