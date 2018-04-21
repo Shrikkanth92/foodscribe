@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.foodscribe.domain.MenuItem;
 import com.foodscribe.domain.Order;
 import com.foodscribe.domain.Payment;
+import com.bookstore.domain.Book;
 import com.foodscribe.domain.CartItem;
 import com.foodscribe.domain.DeliveryAddress;
 import com.foodscribe.domain.ShoppingCart;
@@ -61,6 +62,10 @@ public class OrderServiceImpl implements OrderService{
 		order.setDeliveryAddress(deliveryAddress);
 		
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		for (CartItem cartItem : cartItemList) {
+			cartItem.setOrder(order);
+		}
 		
 		order.setCartItemList(cartItemList);
 		order.setOrderDate(Calendar.getInstance().getTime());
