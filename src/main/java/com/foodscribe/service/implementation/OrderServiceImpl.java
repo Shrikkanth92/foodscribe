@@ -31,21 +31,6 @@ public class OrderServiceImpl implements OrderService{
 	private OrderRepository orderRepository;
 	
 	@Autowired
-	private ShippingAddressRepository shippingAddressRepository;
-	
-	@Autowired
-	private PaymentRepository paymentRepository;
-	
-	@Autowired
-	private MenuService menuService;
-	
-	@Autowired
-	private RestaurantService restaurantService;
-	
-	@Autowired
-	private MailConstructor mailConstructor;
-	
-	@Autowired
 	private CartItemService cartItemService;
 	
 	@Override
@@ -77,14 +62,16 @@ public class OrderServiceImpl implements OrderService{
 		return order;
 	}
 	
-	public Order findOne(Long id) {
-		return orderRepository.findOne(id);
-	}
-
 	@Override
 	public Order createOrder(ShoppingCart shoppingCart, DeliveryAddress deliveryAddress, Payment payment) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Order findByOrderId(Long orderid) {
+		
+		return orderRepository.findOne(orderid);
 	}
 
 
