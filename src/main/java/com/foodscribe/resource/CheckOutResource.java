@@ -59,11 +59,11 @@ public class CheckOutResource {
 		
 		DeliveryAddress deliveryAddress = om.convertValue(mapper.get("deliveryAddress"), DeliveryAddress.class);
 		Payment payment = om.convertValue(mapper.get("payment"), Payment.class);
-		Long userid = (Long) mapper.get("userid");
+		Integer userid =  (Integer) mapper.get("userid");
 		
-		ShoppingCart shoppingCart = userService.findById(userid).getShoppingCart();
+		ShoppingCart shoppingCart = userService.findById(new Long(userid)).getShoppingCart();
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
-		User user = userService.findById(userid);
+		User user = userService.findById(new Long(userid));
 		Order order = orderService.createOrder(shoppingCart, deliveryAddress, payment, user);
 		
 		//mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
