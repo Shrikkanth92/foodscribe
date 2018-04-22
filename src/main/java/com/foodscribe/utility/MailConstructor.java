@@ -56,7 +56,7 @@ public class MailConstructor {
 				email.setTo(user.getEmail());
 				email.setSubject("Order Confirmation - "+order.getId());
 				email.setText(text,true);
-				email.setFrom(new InternetAddress("shrikkanthramesh@gmail.com"));
+				email.setFrom(new InternetAddress("foodscribe.istm631@gmail.com"));
 			}
 		};
 		
