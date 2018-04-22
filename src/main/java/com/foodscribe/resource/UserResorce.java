@@ -17,6 +17,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -131,5 +132,14 @@ public class UserResorce {
 		}
 
 		return user;
+	}
+	
+	@RequestMapping("/getLastName/{userid}")
+	public String getLastName(@PathVariable("userid") Long userid) {
+		User user = new User();
+		
+	    user = userService.findById(userid);
+		
+		return user.getLastName();
 	}
 }
