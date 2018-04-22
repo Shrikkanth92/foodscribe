@@ -3,6 +3,7 @@ package com.foodscribe.resource;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodscribe.domain.CartItem;
+import com.foodscribe.domain.FunFact;
 import com.foodscribe.domain.MenuItem;
 import com.foodscribe.domain.ShoppingCart;
 import com.foodscribe.domain.User;
+import com.foodscribe.repository.FunFactRepository;
 import com.foodscribe.service.CartItemService;
 import com.foodscribe.service.MenuService;
 import com.foodscribe.service.ShoppingCartService;
@@ -39,6 +42,9 @@ public class ShoppingCartResource {
 	
 	@Autowired
 	private ShoppingCartService cartService;
+	
+	@Autowired
+	private FunFactRepository factRepository;
 	
 	@RequestMapping("/add")
 	public ResponseEntity addItem(@RequestBody HashMap<String, String> mapper) {
@@ -96,5 +102,14 @@ public class ShoppingCartResource {
 		cartItemService.updateItem(cartItem);
 		
 		return new ResponseEntity("Menu Item  updated successfully!", HttpStatus.OK);
+	}
+	
+	@RequestMapping("/funfacts")
+	public String getFunFacts(){
+		FunFact fact = new FunFact();
+		Random r = new Random();
+		int low = 1;
+		int high = 7;
+		return factRepository.findOne(new Long(r.nextInt(high-low) + low)).getDescription();
 	}
 }

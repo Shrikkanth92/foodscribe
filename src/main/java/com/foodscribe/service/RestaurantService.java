@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.foodscribe.domain.Restaurant;
 
-
-
 public interface RestaurantService {
 
 	List<Restaurant> findAll();
