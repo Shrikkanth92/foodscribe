@@ -67,7 +67,7 @@ public class CheckOutResource {
 		User user = userService.findById(new Long(userid));
 		Order order = orderService.createOrder(shoppingCart, deliveryAddress, payment, user);
 		
-		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
+		//mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
 		
 		shoppingCartService.clearShoppingCart(shoppingCart);
 		
