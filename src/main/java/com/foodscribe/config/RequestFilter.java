@@ -21,7 +21,7 @@ public class RequestFilter implements Filter{
 		
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-		response.setHeader("Access-Control-Allow-Headers", "x-requested-with, x-auth-token");
+		response.setHeader("Access-Control-Allow-Headers", "x-requested-with, x-auth-token, userid");
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		
@@ -35,7 +35,7 @@ public class RequestFilter implements Filter{
 			System.out.println("Pre-fight");
 			response.setHeader("Access-Control-Allowed-Methods", "POST, GET, DELETE");
 			response.setHeader("Access-Control-Max-Age", "3600");
-			response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, x-auth-token, " +
+			response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, x-auth-token, userid" +
                     "access-control-request-headers,access-control-request-method,accept,origin,authorization,x-requested-with");
 			response.setStatus(HttpServletResponse.SC_OK);
 		}
