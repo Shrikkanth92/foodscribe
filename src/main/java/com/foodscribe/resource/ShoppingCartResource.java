@@ -23,7 +23,7 @@ import com.foodscribe.service.ShoppingCartService;
 import com.foodscribe.service.UserService;
 
 
-@CrossOrigin(maxAge=3600)
+@CrossOrigin(origins = "http://foodscribe.herokuapp.com", maxAge=3600)
 @RestController
 @RequestMapping("/cart")
 public class ShoppingCartResource {

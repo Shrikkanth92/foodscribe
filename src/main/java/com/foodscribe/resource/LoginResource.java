@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ import com.foodscribe.config.SecurityUtility;
 import com.foodscribe.domain.User;
 import com.foodscribe.service.UserService;
 
-
+@CrossOrigin(origins = "http://foodscribe.herokuapp.com", maxAge=3600)
 @RestController
 public class LoginResource {
 

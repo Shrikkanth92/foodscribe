@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,7 @@ import com.foodscribe.service.OrderService;
 import com.foodscribe.service.ShoppingCartService;
 import com.foodscribe.service.UserService;
 import com.foodscribe.utility.MailConstructor;
-
+@CrossOrigin(origins = "http://foodscribe.herokuapp.com", maxAge=3600)
 @RestController
 @RequestMapping("/checkout")
 public class CheckOutResource {
