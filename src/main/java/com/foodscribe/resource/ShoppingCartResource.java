@@ -109,7 +109,7 @@ public class ShoppingCartResource {
 		FunFact fact = new FunFact();
 		Random r = new Random();
 		int low = 1;
-		int high = 7;
+		int high = 20;
 		return factRepository.findOne(new Long(r.nextInt(high-low) + low)).getDescription();
 	}
 }
