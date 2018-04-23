@@ -35,12 +35,12 @@ public class LoginResource {
 		String userEmail = mapper.get("useremail").trim();
 		String password = mapper.get("password").trim();
 		
-		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
+		//String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
 		
 		
 		User user = userService.findByEmail(userEmail);
 		
-		if(user != null && user.getPassword().equals(encryptedPassword)){
+		if(user != null && user.getPassword().equals(password)){
 			return Collections.singletonMap("userId", user.getId());
 		} else {
 			return Collections.singletonMap("userId", Long.parseLong("0"));

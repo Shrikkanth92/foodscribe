@@ -61,8 +61,8 @@ public class UserResorce {
 		
 		String password = mapper.get("password");
 		
-		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
-		user.setPassword(encryptedPassword);
+		//String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
+		user.setPassword(password);
 		
 		userService.createUser(user);
 		
