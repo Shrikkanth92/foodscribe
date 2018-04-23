@@ -40,7 +40,7 @@ public class LoginResource {
 		
 		User user = userService.findByEmail(userEmail);
 		
-		if(user != null){
+		if(user != null && user.getPassword().equals(encryptedPassword)){
 			return Collections.singletonMap("userId", user.getId());
 		} else {
 			return Collections.singletonMap("userId", Long.parseLong("0"));
